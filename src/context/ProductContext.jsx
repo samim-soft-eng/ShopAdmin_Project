@@ -49,15 +49,17 @@ export const ProductProvider = ({ children }) => {
       const q = searchQuery.toLowerCase().trim();
       result = result.filter(
         (p) =>
-          p.name.toLowerCase().includes(q) ||
-          p.category.toLowerCase().includes(q) ||
-          p.description.toLowerCase().includes(q)
+          (p.name || '').toLowerCase().includes(q) ||
+          (p.category || '').toLowerCase().includes(q) ||
+          (p.description || '').toLowerCase().includes(q)
       );
     }
 
     // Category filter
     if (selectedCategory && selectedCategory !== 'All Categories') {
-      result = result.filter((p) => p.category.toLowerCase() === selectedCategory.toLowerCase());
+      result = result.filter(
+        (p) => (p.category || '').toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
 
     // Sorting

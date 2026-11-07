@@ -79,6 +79,7 @@ const ProductDetails = () => {
   }
 
   const inCart = isInCart(product.id);
+  const isOutOfStock = typeof product.stock === 'number' && product.stock <= 0;
   const thumbnails = product.thumbnails && product.thumbnails.length > 0
     ? product.thumbnails
     : [product.image || FALLBACK_PRODUCT_IMAGE];
@@ -186,7 +187,11 @@ const ProductDetails = () => {
                 </span>
               </div>
 
-              {product.stock <= 5 ? (
+              {isOutOfStock ? (
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200">
+                  Out of Stock
+                </span>
+              ) : product.stock <= 5 ? (
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-600 border border-rose-200">
                   Hurry, only {product.stock} units left!
                 </span>
@@ -232,17 +237,19 @@ const ProductDetails = () => {
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <Button
                   size="lg"
-                  variant={inCart ? 'secondary' : 'primary'}
-                  disabled={inCart}
+                  variant={inCart ? 'secondary' : isOutOfStock ? 'secondary' : 'primary'}
+                  disabled={inCart || isOutOfStock}
                   onClick={() => addToCart(product)}
                   icon={inCart ? Check : ShoppingCart}
                   className={`w-full sm:flex-1 shadow-md ${
                     inCart
                       ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 opacity-90 cursor-default'
+                      : isOutOfStock
+                      ? 'opacity-50 cursor-not-allowed'
                       : 'shadow-primary/25'
                   }`}
                 >
-                  {inCart ? 'Already in Cart' : 'Add to Cart'}
+                  {inCart ? 'Already in Cart' : isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
                 </Button>
 
                 <Button

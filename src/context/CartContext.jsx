@@ -10,7 +10,8 @@ export const CartProvider = ({ children }) => {
   const { success, warning, info } = useToast();
 
   const [cart, setCart] = useState(() => {
-    return getStorageItem(STORAGE_KEYS.CART, []);
+    const saved = getStorageItem(STORAGE_KEYS.CART, []);
+    return Array.isArray(saved) ? saved : [];
   });
 
   // Sync with localStorage
@@ -26,7 +27,7 @@ export const CartProvider = ({ children }) => {
   const isInCart = useCallback(
     (productId) => {
       const id = Number(productId);
-      return cart.some((item) => item.id === id);
+      return Array.isArray(cart) && cart.some((item) => item.id === id);
     },
     [cart]
   );
@@ -35,6 +36,11 @@ export const CartProvider = ({ children }) => {
     (product) => {
       if (!product) return false;
       const productId = Number(product.id);
+
+      if (typeof product.stock === 'number' && product.stock <= 0) {
+        warning(`"${product.name}" is currently out of stock.`);
+        return false;
+      }
 
       if (isInCart(productId)) {
         warning(`"${product.name}" is already in your cart.`);

@@ -81,6 +81,8 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
     if (cart.length === 0) {
       toastError('Your cart is empty. Please add items before checking out.');
       return;
@@ -106,6 +108,17 @@ const Checkout = () => {
       }
     }, 600);
   };
+
+  const displayItems = confirmedOrder ? confirmedOrder.items : cart;
+  const displayTotals = confirmedOrder
+    ? {
+        subtotal: confirmedOrder.subtotal,
+        discount: confirmedOrder.discount,
+        tax: confirmedOrder.tax,
+        finalTotal: confirmedOrder.finalTotal,
+        totalQuantity: confirmedOrder.items?.reduce((a, c) => a + (Number(c.quantity) || 1), 0) || 0,
+      }
+    : totals;
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -282,16 +295,16 @@ const Checkout = () => {
           <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-card">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
               <h3 className="text-base font-bold text-slate-900">
-                Order Items ({cart.length})
+                Order Items ({displayItems.length})
               </h3>
               <span className="text-xs text-slate-400">
-                {totals.totalQuantity} total qty
+                {displayTotals.totalQuantity} total qty
               </span>
             </div>
 
             {/* Cart Items List */}
             <div className="divide-y divide-slate-100 max-h-72 overflow-y-auto pr-1 mb-4">
-              {cart.map((item) => (
+              {displayItems.map((item) => (
                 <div
                   key={item.id}
                   className="py-3 flex items-center justify-between gap-3 text-xs sm:text-sm"
@@ -326,17 +339,17 @@ const Checkout = () => {
               <div className="flex justify-between text-slate-500">
                 <span>Subtotal</span>
                 <span className="font-semibold text-slate-900">
-                  {formatINR(totals.subtotal)}
+                  {formatINR(displayTotals.subtotal)}
                 </span>
               </div>
               <div className="flex justify-between text-emerald-600">
                 <span>10% Instant Discount</span>
-                <span className="font-bold">-{formatINR(totals.discount)}</span>
+                <span className="font-bold">-{formatINR(displayTotals.discount)}</span>
               </div>
               <div className="flex justify-between text-slate-500">
                 <span>18% GST Tax</span>
                 <span className="font-semibold text-slate-900">
-                  +{formatINR(totals.tax)}
+                  +{formatINR(displayTotals.tax)}
                 </span>
               </div>
               <div className="flex justify-between text-slate-500">
@@ -349,7 +362,7 @@ const Checkout = () => {
               <div className="pt-3 border-t border-slate-200 flex items-baseline justify-between">
                 <span className="text-base font-bold text-slate-900">Total Payable</span>
                 <span className="text-2xl font-black text-primary">
-                  {formatINR(totals.finalTotal)}
+                  {formatINR(displayTotals.finalTotal)}
                 </span>
               </div>
             </div>

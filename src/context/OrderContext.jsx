@@ -79,11 +79,13 @@ export const OrderProvider = ({ children }) => {
   const { success, error } = useToast();
 
   const [orders, setOrders] = useState(() => {
-    return getStorageItem(STORAGE_KEYS.ORDERS, INITIAL_DEMO_ORDERS);
+    const saved = getStorageItem(STORAGE_KEYS.ORDERS, INITIAL_DEMO_ORDERS);
+    return Array.isArray(saved) ? saved : INITIAL_DEMO_ORDERS;
   });
 
   const [activities, setActivities] = useState(() => {
-    return getActivities();
+    const saved = getActivities();
+    return Array.isArray(saved) ? saved : [];
   });
 
   // Persist orders

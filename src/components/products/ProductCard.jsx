@@ -11,8 +11,16 @@ const ProductCard = ({ product }) => {
   const { isInCart, addToCart } = useCart();
 
   const inCart = isInCart(product.id);
+  const isOutOfStock = typeof product.stock === 'number' && product.stock <= 0;
 
   const getStockBadge = (stock) => {
+    if (stock <= 0) {
+      return (
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">
+          Out of Stock
+        </span>
+      );
+    }
     if (stock <= 5) {
       return (
         <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-200">
@@ -109,13 +117,19 @@ const ProductCard = ({ product }) => {
           <div className="flex items-center gap-1.5">
             <Button
               size="sm"
-              variant={inCart ? 'secondary' : 'primary'}
-              disabled={inCart}
+              variant={inCart ? 'secondary' : isOutOfStock ? 'secondary' : 'primary'}
+              disabled={inCart || isOutOfStock}
               onClick={() => addToCart(product)}
               icon={inCart ? Check : ShoppingCart}
-              className={inCart ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 opacity-90 cursor-default' : ''}
+              className={
+                inCart
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 opacity-90 cursor-default'
+                  : isOutOfStock
+                  ? 'opacity-50 cursor-not-allowed'
+                  : ''
+              }
             >
-              {inCart ? 'Already in Cart' : 'Add to Cart'}
+              {inCart ? 'Already in Cart' : isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
             </Button>
           </div>
         </div>

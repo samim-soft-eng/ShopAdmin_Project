@@ -10,7 +10,9 @@ export const ACTIVITY_TYPES = {
 };
 
 export const getActivities = () => {
-  return getStorageItem(STORAGE_KEYS.ACTIVITIES, [
+  const result = getStorageItem(STORAGE_KEYS.ACTIVITIES, null);
+  if (Array.isArray(result)) return result;
+  return [
     {
       id: 'act-init-1',
       type: 'SYSTEM',
@@ -18,7 +20,7 @@ export const getActivities = () => {
       timestamp: new Date(Date.now() - 3600000).toISOString(),
       status: 'info',
     },
-  ]);
+  ];
 };
 
 export const recordActivity = (type, description, status = 'info') => {
