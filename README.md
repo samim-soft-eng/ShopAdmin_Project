@@ -221,10 +221,12 @@ ShopAdmin/
 
 ## 🔑 Demo Login Instructions
 
-On the login page (`/login`), you can click the **"Fill Demo"** button or enter:
+On the login page (`/login`), you can click the **"Fill Demo"** button or enter the authorized administrator credentials:
 
 - **Email**: `admin@shopadmin.com`
-- **Password**: `password123` *(Any password with at least 6 characters is accepted in demo mode)*
+- **Password**: `password123`
+
+*(Note: As required for the machine test, authentication is restricted to these specific authorized demo credentials. All other email and password combinations will be rejected with "Invalid email or password".)*
 
 ---
 

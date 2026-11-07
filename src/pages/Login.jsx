@@ -49,9 +49,9 @@ const Login = () => {
     const result = login(email, password, rememberMe);
 
     if (!result.success) {
-      if (result.error.toLowerCase().includes('email')) {
+      if (result.field === 'email') {
         setFormErrors({ email: result.error });
-      } else if (result.error.toLowerCase().includes('password')) {
+      } else if (result.field === 'password') {
         setFormErrors({ password: result.error });
       } else {
         setFormErrors({ general: result.error });
@@ -136,7 +136,7 @@ const Login = () => {
         <div className="relative z-10 flex items-center justify-between text-xs text-slate-400 pt-8 border-t border-white/10">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>AES-256 Session Encrypted Demo</span>
+            <span>Client-Side Demo Session</span>
           </div>
           <span>ShopAdmin v2.4</span>
         </div>
@@ -171,7 +171,7 @@ const Login = () => {
               <div className="text-xs text-slate-700">
                 <span className="font-bold text-primary">Demo Account:</span>
                 <span className="block text-[11px] text-slate-500">
-                  admin@shopadmin.com &bull; min 6 chars
+                  admin@shopadmin.com &bull; password123
                 </span>
               </div>
             </div>
@@ -195,7 +195,7 @@ const Login = () => {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                if (formErrors.email) setFormErrors((p) => ({ ...p, email: null }));
+                setFormErrors((p) => ({ ...p, email: null, general: null }));
               }}
               error={formErrors.email}
               required
@@ -210,7 +210,7 @@ const Login = () => {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                if (formErrors.password) setFormErrors((p) => ({ ...p, password: null }));
+                setFormErrors((p) => ({ ...p, password: null, general: null }));
               }}
               error={formErrors.password}
               required

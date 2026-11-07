@@ -4,6 +4,11 @@ import { validateEmail, validatePassword } from '../utils/validation';
 
 const AuthContext = createContext(null);
 
+export const DEMO_CREDENTIALS = {
+  email: 'admin@shopadmin.com',
+  password: 'password123',
+};
+
 const DEFAULT_DEMO_USER = {
   name: 'Alex Morgan',
   email: 'admin@shopadmin.com',
@@ -36,30 +41,28 @@ export const AuthProvider = ({ children }) => {
   }, [user]);
 
   /**
-   * Demo authentication: checks email format and password length >= 6
+   * Demo authentication: validates format, then checks authorized demo credentials
    */
   const login = (email, password, rememberMe = true) => {
+    // 1. Format validation
     const emailError = validateEmail(email);
     if (emailError) {
-      return { success: false, error: emailError };
+      return { success: false, error: emailError, field: 'email' };
     }
 
     const passwordError = validatePassword(password);
     if (passwordError) {
-      return { success: false, error: passwordError };
+      return { success: false, error: passwordError, field: 'password' };
     }
 
-    // Generate user profile dynamically based on email
-    const namePart = email.split('@')[0];
-    const formattedName = namePart
-      .split(/[._-]/)
-      .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-      .join(' ') || 'Admin User';
+    // 2. Verify against authorized demo credentials
+    const trimmedEmail = (email || '').trim().toLowerCase();
+    if (trimmedEmail !== DEMO_CREDENTIALS.email || password !== DEMO_CREDENTIALS.password) {
+      return { success: false, error: 'Invalid email or password', field: 'general' };
+    }
 
     const authenticatedUser = {
       ...DEFAULT_DEMO_USER,
-      name: email === 'admin@shopadmin.com' ? 'Alex Morgan' : formattedName,
-      email: email.trim().toLowerCase(),
     };
 
     setUser(authenticatedUser);
