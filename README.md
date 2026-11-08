@@ -1,6 +1,6 @@
 ## ShopAdmin – Product Management Dashboard & Cart System
 
-* A modern, production-grade, responsive React web application built as an e-commerce administration and shopping cart management system.
+A modern, production-grade, responsive React web application built as an e-commerce administration and shopping cart management system.
 
 ShopAdmin features a SaaS dashboard aesthetic with real-time shopping cart operations, accurate multi-step financial calculations (10% promotional discount and 18% GST), product catalog filtering and search, complete order dispatch with customer details validation, and persistent browser storage.
 
@@ -242,3 +242,5 @@ On the login page (`/login`), you can click the **"Fill Demo"** button or enter 
 | **Cart Calculation Logic** | **15** | Dynamic Subtotal, 10% Discount, 18% GST calculation, strict $\ge 1$ quantity boundary, item subtotals, and currency formatting in INR (`₹`). |
 | **Form Validation** | **10** | Regex email validation, 6+ char password, 10-digit phone, 6-digit pincode, required fields, and clear inline error alerts on Login and Checkout. |
 | **Code Readability** | **5** | Clean ES6+ syntax, comprehensive JSDoc comments, safe storage wrappers, and no unused dependencies. |
+
+Email-samimmondal6596@gmail.com
