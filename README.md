@@ -1,6 +1,6 @@
 ## ShopAdmin – Product Management Dashboard & Cart System
 
-A modern, production-grade, responsive React web application built as an e-commerce administration and shopping cart management system.
+* A modern, production-grade, responsive React web application built as an e-commerce administration and shopping cart management system.
 
 ShopAdmin features a SaaS dashboard aesthetic with real-time shopping cart operations, accurate multi-step financial calculations (10% promotional discount and 18% GST), product catalog filtering and search, complete order dispatch with customer details validation, and persistent browser storage.
 
