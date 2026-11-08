@@ -13,7 +13,7 @@ import {
   CheckCircle2,
   Sparkles,
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { DEMO_CREDENTIALS, useAuth } from '../context/AuthContext';
 import { useOrders } from '../context/OrderContext';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
@@ -30,7 +30,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || 'Alex Morgan',
-    email: user?.email || 'admin@shopadmin.com',
+    email: user?.email || DEMO_CREDENTIALS.email,
     phone: user?.phone || '+91 98765 43210',
     location: user?.location || 'Bengaluru, Karnataka, India',
     company: user?.company || 'ShopAdmin Global Logistics',

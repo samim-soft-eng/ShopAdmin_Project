@@ -15,7 +15,7 @@ ShopAdmin features a SaaS dashboard aesthetic with real-time shopping cart opera
   - Password minimum length verification (&ge; 6 characters).
   - Show/Hide password toggle.
   - Remember Me preference.
-- **Demo Mode**: One-click **"Fill Demo"** button (`admin@shopadmin.com` / `password123`).
+- **Demo Mode**: One-click **"Fill Demo"** button (`samim@gmail.com` / `123456`).
 - **Security & Route Protection**:
   - `ProtectedRoute` wrapper guarding all dashboard routes.
   - Automatic redirect for unauthenticated users back to login with destination memory.
@@ -223,8 +223,8 @@ ShopAdmin/
 
 On the login page (`/login`), you can click the **"Fill Demo"** button or enter the authorized administrator credentials:
 
-- **Email**: `admin@shopadmin.com`
-- **Password**: `password123`
+- **Email**: `samim@gmail.com`
+- **Password**: `123456`
 
 *(Note: As required for the machine test, authentication is restricted to these specific authorized demo credentials. All other email and password combinations will be rejected with "Invalid email or password".)*
 

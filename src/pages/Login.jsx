@@ -12,7 +12,7 @@ import {
   Zap,
   CheckCircle2,
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { DEMO_CREDENTIALS, useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
@@ -37,8 +37,8 @@ const Login = () => {
   }
 
   const handleFillDemo = () => {
-    setEmail('admin@shopadmin.com');
-    setPassword('password123');
+    setEmail(DEMO_CREDENTIALS.email);
+    setPassword(DEMO_CREDENTIALS.password);
     setFormErrors({});
   };
 
@@ -171,7 +171,7 @@ const Login = () => {
               <div className="text-xs text-slate-700">
                 <span className="font-bold text-primary">Demo Account:</span>
                 <span className="block text-[11px] text-slate-500">
-                  admin@shopadmin.com &bull; password123
+                  {DEMO_CREDENTIALS.email} &bull; {DEMO_CREDENTIALS.password}
                 </span>
               </div>
             </div>

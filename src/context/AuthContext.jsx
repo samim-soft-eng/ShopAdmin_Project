@@ -5,13 +5,13 @@ import { validateEmail, validatePassword } from '../utils/validation';
 const AuthContext = createContext(null);
 
 export const DEMO_CREDENTIALS = {
-  email: 'admin@shopadmin.com',
-  password: 'password123',
+  email: 'samim@gmail.com',
+  password: '123456',
 };
 
 const DEFAULT_DEMO_USER = {
   name: 'Alex Morgan',
-  email: 'admin@shopadmin.com',
+  email: DEMO_CREDENTIALS.email,
   role: 'Store Administrator',
   avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80',
   phone: '+91 98765 43210',

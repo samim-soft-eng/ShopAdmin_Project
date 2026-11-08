@@ -10,7 +10,7 @@ import {
   ShoppingBag,
   Sparkles,
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { DEMO_CREDENTIALS, useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { useOrders } from '../../context/OrderContext';
 import { useToast } from '../../context/ToastContext';
@@ -165,7 +165,7 @@ const Sidebar = ({ onItemClick }) => {
                 {user?.name || 'Admin User'}
               </p>
               <p className="text-[10px] text-slate-400 truncate">
-                {user?.email || 'admin@shopadmin.com'}
+                {user?.email || DEMO_CREDENTIALS.email}
               </p>
             </div>
           </div>
