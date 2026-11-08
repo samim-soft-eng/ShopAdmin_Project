@@ -1,4 +1,4 @@
-# ShopAdmin – Product Management Dashboard & Cart System
+## ShopAdmin – Product Management Dashboard & Cart System
 
 A modern, production-grade, responsive React web application built as an e-commerce administration and shopping cart management system.
 
